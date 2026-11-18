@@ -1,0 +1,47 @@
+---
+import { promReviews } from "../../data/site";
+
+// Віхи — сторінка «Про нас» клієнта (W-F004). Позиція на шкалі пропорційна року (1999–2026).
+const first = 1999;
+const last = 2026;
+const marks = [
+  { year: 1999, text: "Запрацював сайт (грудень)" },
+  { year: 2000, text: "Зареєстровано домен" },
+  { year: 2004, text: "Онлайн-база цін" },
+  { year: 2012, text: "Онлайн-каталоги" },
+  { year: 2014, text: "Новий фірмовий стиль" },
+  { year: 2016, text: "Мобільна версія" },
+  { year: 2019, text: "Оновлення і магазин" },
+  { year: 2022, text: "Оновлений каталог ліцензійних деталей" },
+  { year: 2026, text: "Понад 25 років у мережі" },
+];
+const pos = (y: number) => ((y - first) / (last - first)) * 100;
+---
+<section id="about" class="about" aria-labelledby="about-title" data-rec="U-R006,SM-R006">
+  <div class="container grid about__top">
+    <div class="about__text">
+      <h2 id="about-title" data-reveal>Впевненість у кожній деталі — з 1999 року</h2>
+      <p class="lead">Zapchasti.kiev.ua — сімейне підприємство, ФОП Лагута С. В. Ми продаємо запчастини для іномарок у мережі понад 25 років, і основна частина наших замовників — постійні клієнти, які впевнені в якості деталей.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <span class="anchor-num about__num" data-reveal>1999</span>
+    <ol class="timeline" data-reveal="timeline" aria-label="Віхи з 1999 по 2026 рік">
+      {marks.map((m, i) => (
+        <li class:list={["timeline__mark", i % 2 ? "is-low" : "is-high"]} style={`--x:${pos(m.year).toFixed(2)}%; --i:${i}`}>
+          <span class="timeline__year tnum">{m.year}</span>
+          <span class="timeline__text">{m.text}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="container grid about__proof">
+    <p class="proof">
+      <span class="proof__big tnum">99%</span>
+      <span class="proof__text">позитивних відгуків, 1554 відгуки на Prom.ua (станом на 18.11.2026). Це наш магазин «ЗАПЧАСТИНА.com» на платформі Prom.ua.</span>
+    </p>
+    <a class="btn btn--secondary proof__link" href={promReviews} rel="noopener" target="_blank">Читати відгуки на Prom.ua<span class="visually-hidden"> (відкриється в новій вкладці)</span></a>
+  </div>
+</section>

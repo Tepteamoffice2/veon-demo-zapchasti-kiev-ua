@@ -1,0 +1,24 @@
+---
+import Icon from "../Icon.astro";
+import { mainPhone } from "../../data/site";
+const brands = ["Ford", "Volkswagen", "Audi", "BMW", "Mercedes"];
+---
+<section id="sto" class="sto on-forest" aria-labelledby="sto-title" data-rec="U-R009">
+  <div class="container grid">
+    <h2 id="sto-title" class="sto__title" data-reveal>Стабільні поставки оригіналу для Ford, VW, Audi, BMW і Mercedes</h2>
+    <p class="sto__brands">
+      {brands.map((b) => <span>{b}</span>)}
+    </p>
+    <dl class="sto__facts">
+      <div><dt>Стабільні поставки</dt><dd>Оригінальні автозапчастини для автомобілів цих марок, з якими працює ваш сервіс чи магазин.</dd></div>
+      <div><dt>Індивідуальні умови</dt><dd>Ціни й умови роботи для гуртових покупців та СТО обговорюємо окремо, телефоном.</dd></div>
+      <div><dt>Підтримка і доставка</dt><dd>Допомагаємо з підбором і відправляємо замовлення по всій Україні.</dd></div>
+    </dl>
+    <div class="sto__cta">
+      <a class="btn btn--paper" href={mainPhone.href}><Icon name="phone" /><span>Обговорити умови</span></a>
+      <p class="sto__phones">
+        Менеджер на зв'язку за номером <a class="link tnum" href={mainPhone.href}>{mainPhone.display}</a>, Пн–Пт 9:00–18:30.
+      </p>
+    </div>
+  </div>
+</section>

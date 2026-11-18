@@ -1,0 +1,44 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { mainPhone, viber, telegram, hoursLine } from "../../data/site";
+---
+<section id="hero" class="hero" aria-labelledby="hero-title" data-rec="U-R002,U-R004,U-R006,U-R014,G-R003,S-R003">
+  <div class="container hero__grid">
+    <h1 id="hero-title" class="hero__title">
+      <span class="hero__line">Нові запчастини</span> <span class="hero__line">для європейських іномарок</span> <span class="hero__line">під замовлення у Києві</span>
+    </h1>
+
+    <p class="hero__lead">Підбираємо оригінальні та ліцензійні деталі за кодом або за даними авто, а забрати їх можна в Києві чи отримати Новою поштою.</p>
+
+    <div class="hero__contact">
+      <a class="hero__number tnum" href={mainPhone.href}>{mainPhone.display}</a>
+      <a class="btn btn--primary btn--block" href={mainPhone.href}>
+        <Icon name="phone" /><span class="nowrap">Подзвонити</span><span class="hero__call-number tnum nowrap">{mainPhone.display}</span>
+      </a>
+      <div class="btn-pair">
+        <a class="btn btn--secondary" href={viber.href}><Icon name="viber" /><span>Viber</span></a>
+        <a class="btn btn--secondary" href={telegram.href}><Icon name="telegram" /><span>Telegram</span></a>
+      </div>
+      <p class="hero__hours">{hoursLine}</p>
+    </div>
+
+    <p class="hero__facts">Онлайн з 1999 року. Сімейне підприємство. Самовивіз у Києві або Нова пошта.</p>
+
+    <div class="code-strip on-forest">
+      <div class="code-strip__field">
+        <label for="part-code">Код деталі</label>
+        <div class="code-strip__row">
+          <input id="part-code" name="part-code" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+            placeholder="Номер з деталі" aria-describedby="part-code-hint" />
+          <FutureLink note="Пошук за кодом з'явиться у повній версії сайту" class="btn btn--future code-strip__go">
+            <Icon name="search" /><span>Знайти</span>
+          </FutureLink>
+        </div>
+      </div>
+      <p id="part-code-hint" class="code-strip__hint">
+        Не знайшли або не знаєте коду? Напишіть у <a href={viber.href}>Viber</a> чи <a href={telegram.href}>Telegram</a>, відповімо з ціною і терміном.
+      </p>
+    </div>
+  </div>
+</section>

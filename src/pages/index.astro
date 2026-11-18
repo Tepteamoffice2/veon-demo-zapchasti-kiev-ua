@@ -1,0 +1,55 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ActionBar from "../components/ActionBar.astro";
+import Hero from "../components/sections/Hero.astro";
+import Order from "../components/sections/Order.astro";
+import Range from "../components/sections/Range.astro";
+import Sto from "../components/sections/Sto.astro";
+import Terms from "../components/sections/Terms.astro";
+import About from "../components/sections/About.astro";
+import Contacts from "../components/sections/Contacts.astro";
+import { phones, email, facebook, promShop } from "../data/site";
+
+const title = "Запчастини для іномарок під замовлення в Києві — Zapchasti.kiev.ua";
+const description = "Нові оригінальні та ліцензійні запчастини для Ford, VW, Audi, Mercedes і ще 16 марок. Підбір за кодом, самовивіз у Києві, доставка по Україні. З 1999 року.";
+
+// Рейтинг Prom.ua свідомо не розмічається як AggregateRating (сторонні відгуки).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AutoPartsStore",
+  name: "Zapchasti.kiev.ua",
+  legalName: "ФОП Лагута Сергій Валерійович",
+  description,
+  foundingDate: "1999",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "пров. Радищева, 3, офіс 229 (2-й поверх)",
+    addressLocality: "Київ",
+    postalCode: "03124",
+    addressCountry: "UA",
+  },
+  telephone: phones.map((p) => p.href.replace("tel:", "")),
+  email,
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:30" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "13:00" },
+  ],
+  areaServed: "UA",
+  sameAs: [facebook, promShop],
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <script slot="head" type="application/ld+json" data-rec="S-R004,SM-R007" set:html={JSON.stringify(jsonLd)} />
+  <Header slot="header" />
+  <Hero />
+  <Order />
+  <Range />
+  <Sto />
+  <Terms />
+  <About />
+  <Contacts />
+  <Footer slot="footer" />
+  <ActionBar slot="after" />
+</Base>

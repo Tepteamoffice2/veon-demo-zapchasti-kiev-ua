@@ -1,0 +1,32 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { mainPhone, viber, soon } from "../../data/site";
+---
+<section id="terms" class="terms" aria-labelledby="terms-title" data-rec="U-R007,G-R003">
+  <div class="container grid">
+    <div class="terms__num">
+      <span class="anchor-num" data-reveal>50%</span>
+      <span class="anchor-cap">передоплата лише на деталі під замовлення; зі складу оплата під час отримання</span>
+    </div>
+    <div class="terms__body">
+      <h2 id="terms-title" data-reveal>Передоплата — тільки на деталі під замовлення</h2>
+      <dl class="terms__list">
+        <div><dt>Замовлення</dt><dd>Телефоном, у Viber чи Telegram або листом на e-mail.</dd></div>
+        <div><dt>Оплата</dt><dd>Готівкою, на картку ПриватБанку або післяплатою.</dd></div>
+        <div><dt>Доставка</dt><dd>Самовивіз, таксі по Києву або Нова пошта. Доставку оплачує замовник.</dd></div>
+        <div><dt>Терміни</dt><dd>Орієнтовні. Точний термін уточнює менеджер телефоном або у Viber.</dd></div>
+        <div><dt>Повернення</dt><dd>Одразу, якщо деталь не підійшла з нашої вини; в інших випадках за погодженням.</dd></div>
+        <div><dt>Гарантія</dt><dd>3 місяці на ліцензійні запчастини; на оригінальні до моменту встановлення.</dd></div>
+        <div><dt>Гуртовим покупцям і СТО</dt><dd>Індивідуальні умови роботи. <a class="link" href="#sto">Що пропонуємо СТО</a></dd></div>
+      </dl>
+      <div class="terms__foot">
+        <FutureLink note={soon} class="terms__all">Усі умови поставки</FutureLink>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={mainPhone.href}><Icon name="phone" /><span>Подзвонити</span></a>
+          <a class="btn btn--secondary" href={viber.href}><Icon name="viber" /><span>Написати у Viber</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+import Logo from "./Logo.astro";
+import FutureLink from "./FutureLink.astro";
+import { nav, soon } from "../data/site";
+---
+<footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="site-footer__row">
+      <Logo eager={false} />
+      <nav aria-label="Розділи головної (низ сторінки)">
+        <ul class="site-footer__nav">
+          {nav.map((n) => <li><a href={`#${n.id}`}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer__row site-footer__row--meta">
+      <ul class="site-footer__future">
+        <li><FutureLink note={soon}>Каталог</FutureLink></li>
+        <li><FutureLink note={soon}>Статті</FutureLink></li>
+        <li><FutureLink note={soon}>Політика конфіденційності</FutureLink></li>
+      </ul>
+      <p class="site-footer__copy">© 2000–2026 Zapchasti.kiev.ua. ФОП Лагута С. В.</p>
+    </div>
+  </div>
+</footer>

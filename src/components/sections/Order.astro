@@ -1,0 +1,119 @@
+---
+import Icon from "../Icon.astro";
+import { mainPhone, viber, telegram, mailRequest } from "../../data/site";
+
+const tabs = [
+  { id: "code", label: "Маю код", short: "Маю код" },
+  { id: "nocode", label: "Не знаю коду", short: "Без коду" },
+  { id: "b2b", label: "СТО і магазин", short: "Для СТО" },
+];
+---
+<section id="order" class="order" aria-labelledby="order-title" data-rec="U-R003,G-R003">
+  <div class="container">
+    <div class="order__head">
+      <h2 id="order-title" data-reveal>Почніть з того, що знаєте: код, авто або назва деталі</h2>
+      <p class="order__intro">Кожну деталь підбирає менеджер. Оберіть, з чим ви приходите, і ми підкажемо найкоротший шлях.</p>
+    </div>
+
+    <div class="order__tabs" role="tablist" aria-label="З чим ви приходите" hidden>
+      {tabs.map((t, i) => (
+        <button type="button" role="tab" id={`tab-${t.id}`} aria-controls={`panel-${t.id}`}
+          aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} class="order__tab"><span class="order__tab-full">{t.label}</span><span class="order__tab-short">{t.short}</span></button>
+      ))}
+    </div>
+
+    <div class="order__panels">
+      <div class="order__panel is-active" id="panel-code" role="tabpanel" aria-labelledby="tab-code">
+        <div class="order__main">
+          <h3>Маю код: надішліть його менеджеру</h3>
+          <p>Код є на старій деталі, в каталозі або в замовленні від майстра. Надішліть його у Viber чи Telegram, можна з фото деталі. Менеджер перевірить, де є така деталь, і відповість з ціною та орієнтовним терміном.</p>
+        </div>
+        <div class="order__aside">
+          <p class="order__label">Найшвидше</p>
+          <div class="order__stack">
+            <a class="btn btn--primary" href={viber.href}><Icon name="viber" /><span>Надіслати у Viber</span></a>
+            <a class="btn btn--secondary" href={telegram.href}><Icon name="telegram" /><span>Надіслати у Telegram</span></a>
+            <p class="order__phone">або подзвоніть <a class="link tnum nowrap" href={mainPhone.href}>{mainPhone.display}</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="order__panel" id="panel-nocode" role="tabpanel" aria-labelledby="tab-nocode">
+        <div class="order__main">
+          <h3>Не знаю коду: підберемо за даними авто</h3>
+          <p>Підготуйте кілька даних про машину, менеджер підбере деталь і запропонує варіанти: оригінал або ліцензійний аналог.</p>
+          <div class="order__stack">
+            <a class="btn btn--primary" href={mailRequest}><Icon name="mail" /><span>Написати запит на e-mail</span></a>
+            <div class="btn-pair">
+              <a class="btn btn--secondary" href={viber.href}><Icon name="viber" /><span>Viber</span></a>
+              <a class="btn btn--secondary" href={telegram.href}><Icon name="telegram" /><span>Telegram</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="order__aside">
+          <p class="order__label">Що підготувати</p>
+          <ol class="checklist">
+            <li>Марка і модель авто</li>
+            <li>Рік випуску</li>
+            <li>VIN, якщо він під рукою</li>
+            <li>Назва деталі або що саме потрібно замінити</li>
+            <li>Самовивіз у Києві чи доставка Новою поштою</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="order__panel" id="panel-b2b" role="tabpanel" aria-labelledby="tab-b2b">
+        <div class="order__main">
+          <h3>СТО і магазин: стабільні поставки оригіналу</h3>
+          <p>Працюєте з Ford, Volkswagen, Audi, BMW чи Mercedes? Для СТО і магазинів у нас індивідуальні умови роботи. Їх обговорюємо телефоном.</p>
+        </div>
+        <div class="order__aside">
+          <p class="order__label">Далі</p>
+          <div class="order__stack">
+            <a class="btn btn--primary" href={mainPhone.href}><Icon name="phone" /><span class="nowrap">Подзвонити {mainPhone.display}</span></a>
+            <a class="btn btn--secondary" href="#sto"><span>Умови для СТО</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="order__rule">
+      <strong>Як оплачується:</strong> деталі зі складу оплачуються під час отримання. На запчастини під замовлення передоплата 50%, термін уточнює менеджер.
+    </p>
+  </div>
+</section>
+
+<script>
+  const list = document.querySelector<HTMLElement>(".order__tabs");
+  if (list) {
+    const tabs = Array.from(list.querySelectorAll<HTMLButtonElement>("[role=tab]"));
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute("aria-controls") || ""));
+    list.hidden = false;
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, k) => {
+        const on = k === i;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        const p = panels[k];
+        if (!p) return;
+        p.classList.toggle("is-active", on);
+        if (on) p.removeAttribute("inert"); else p.setAttribute("inert", "");
+        p.setAttribute("aria-hidden", String(!on));
+      });
+      if (focus) tabs[i].focus();
+    };
+    select(0);
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(i));
+      t.addEventListener("keydown", (e) => {
+        const k = e.key;
+        let n = -1;
+        if (k === "ArrowRight") n = (i + 1) % tabs.length;
+        else if (k === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
+        else if (k === "Home") n = 0;
+        else if (k === "End") n = tabs.length - 1;
+        if (n >= 0) { e.preventDefault(); select(n, true); }
+      });
+    });
+  }
+</script>

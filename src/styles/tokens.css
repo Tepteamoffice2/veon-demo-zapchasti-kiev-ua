@@ -1,0 +1,85 @@
+/* Hallmark · shape: custom · genre: modern-minimal · theme: custom · job: buy (через менеджера, дія як у hire) · idea: "Точність, яку можна перевірити: від того, що знає відвідувач, — до живого менеджера" · vibe: "точний, спокійний, сімейний, київський, без вітрини"
+ * paper: #EEF2EE · accent: #9B2D3F · display: Sofia Sans Condensed · body: IBM Plex Sans · hero: H1 на 9 колонок, колонка зв'язку праворуч, смуга коду на всю ширину внизу · nav: логотип клієнта, 6 якорів, номер текстом і кнопка дзвінка · footer: світлий, два рядки · imagery: none (логотип клієнта) · signature: смуга коду і великі числа розділів
+ * axes: light/display-condensed/chromatic-red · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H4 E4 S4 R5 V4 · weakest: E, сторінка без фото може читатися сухо; тримаємо її великими реальними числами розділів (20, 50%, 1999, оф. 229) і зміною поверхонь paper, forest, sage */
+/* Hallmark · answered F4 · paper-filled button lives only on forest sections (sto, contacts) where the wine call button would sit on dark green; on light paper the wine button stays the one filled primary */
+/* Hallmark · answered F19 · concept.md fixes the weights: Sofia Sans Condensed 700 heads and 800 section numbers, IBM Plex Sans 400 text, 500 labels, 600 buttons */
+/* Hallmark · dismissed 49 · the phone labels sit inside .btn with white-space: nowrap and a .nowrap span; at 320 px they wrap on purpose to avoid clipping the number */
+/* Client design tokens: only from design/concept.md (veon-concept: colors, fonts). */
+:root {
+  /* Колір */
+  --color-bg: #EEF2EE;
+  --color-surface: #F8FAF7;
+  --color-sage: #E1E8E2;
+  --color-text: #15211B;
+  --color-muted: #4A5A51;
+  --color-brand: #2B7A57;
+  --color-forest: #173F2E;
+  --color-on-forest: #EEF2EE;
+  --color-mint: #C9DED0;
+  --color-accent: #9B2D3F;
+  --color-accent-hover: #7F2433;
+  --color-on-accent: #F8FAF7;
+  --color-accent-ink: var(--color-on-accent);
+  --color-line: #BFCBC3;
+  --color-field: #7A8A81;
+
+  /* Шрифти */
+  --font-display: "Sofia Sans Condensed", "Sofia Sans Condensed Fallback", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", "IBM Plex Sans Fallback", Arial, sans-serif;
+
+  /* Шкала (6 розмірів) */
+  --fs-anchor: clamp(4rem, 1.9rem + 8.6vw, 10rem);
+  --fs-h1: clamp(2.5rem, 1.3rem + 4.9vw, 5.75rem);
+  --fs-h2: clamp(2.25rem, 1.85rem + 1.6vw, 3.5rem);
+  --fs-h3: 1.75rem;
+  --fs-lead: 1.25rem;
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --measure: 62ch;
+
+  /* Відступи 4/8 */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px; --s-11: 160px;
+
+  /* Сітка: 12 колонок, max 1360, gutter 24, поля 20 / 32 */
+  --space: clamp(1.25rem, 0.5rem + 3.1vw, 2rem);
+  --container: 1360px;
+  --gutter: 24px;
+  /* Брейкпоінти (для медіазапитів): 480 / 768 / 1024 / 1200 / 1440 */
+
+  --radius: 2px;
+  --control-h: 52px;
+  --tap: 44px;
+  --header-h: 56px;
+  --bar-h: 56px;
+
+  /* Рух */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 500ms;
+  --dur-fast: 180ms;
+}
+@media (min-width: 1024px) { :root { --header-h: 72px; } }
+
+/* Шрифти: локально, WOFF2, кирилиця + латиниця, swap */
+@font-face { font-family: "Sofia Sans Condensed"; font-style: normal; font-weight: 100 1000; font-display: swap;
+  src: url("/fonts/sofia-sans-condensed-cyrillic-ua-wght-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Sofia Sans Condensed"; font-style: normal; font-weight: 100 1000; font-display: swap;
+  src: url("/fonts/sofia-sans-condensed-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-500-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-cyrillic-600-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* Метрично підібрані запасні шрифти (менше зсуву при swap) */
+@font-face { font-family: "IBM Plex Sans Fallback"; src: local("Arial"), local("Helvetica"); size-adjust: 101%; ascent-override: 101%; descent-override: 27%; line-gap-override: 0%; }
+@font-face { font-family: "Sofia Sans Condensed Fallback"; src: local("Arial Narrow"), local("Arial"); size-adjust: 88%; ascent-override: 100%; descent-override: 26%; line-gap-override: 0%; }

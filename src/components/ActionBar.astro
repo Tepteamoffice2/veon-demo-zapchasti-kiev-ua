@@ -1,0 +1,29 @@
+---
+// Нижня панель дії на телефоні (< 768 px): з'являється, коли перший екран прокручено.
+import Icon from "./Icon.astro";
+import { mainPhone, viber, telegram } from "../data/site";
+---
+<nav class="action-bar on-forest" aria-label="Швидкий зв'язок" data-rec="U-R002">
+  <a href={mainPhone.href}><Icon name="phone" /><span>Подзвонити</span></a>
+  <a href={viber.href}><Icon name="viber" /><span>Viber</span></a>
+  <a href={telegram.href}><Icon name="telegram" /><span>Telegram</span></a>
+</nav>
+
+<script>
+  const bar = document.querySelector<HTMLElement>(".action-bar");
+  const hero = document.getElementById("hero");
+  const contacts = document.getElementById("contacts");
+  if (bar && hero && "IntersectionObserver" in window) {
+    bar.classList.add("is-armed");
+    let heroVisible = true;
+    let contactsVisible = false;
+    const update = () => {
+      const show = !heroVisible && !contactsVisible;
+      bar.classList.toggle("is-shown", show);
+      if (show) bar.removeAttribute("inert"); else bar.setAttribute("inert", "");
+    };
+    new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; update(); }).observe(hero);
+    if (contacts) new IntersectionObserver(([e]) => { contactsVisible = e.isIntersecting; update(); }, { threshold: 0.25 }).observe(contacts);
+    update();
+  }
+</script>

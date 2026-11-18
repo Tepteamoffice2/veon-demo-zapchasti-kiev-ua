@@ -1,0 +1,53 @@
+---
+import FutureLink from "../FutureLink.astro";
+import { soon } from "../../data/site";
+
+const main = ["Ford", "Volkswagen", "Audi", "Mercedes-Benz"];
+const more = ["BMW", "Citroen", "Dacia", "Fiat", "Hyundai", "Kia", "Mazda", "Mitsubishi", "Opel", "Peugeot", "Porsche", "Renault", "Seat", "Skoda", "Toyota", "Volvo"];
+const groups = [
+  "Акумулятори", "Поршні", "Поршневі кільця", "Вкладиші двигуна", "Прокладки двигуна",
+  "Ремені й ролики", "Сайлентблоки й подушки", "Деталі зчеплення", "Деталі підвіски", "Амортизатори й пружини",
+  "Підшипники маточини", "ШРУСи й півосі", "Фари й ліхтарі", "Колодки й диски", "Фільтри",
+  "Деталі вихлопної системи", "Свічки й дроти", "Деталі кузова", "Помпи й радіатори", "Деталі для тюнінгу",
+];
+---
+<section id="range" class="range" aria-labelledby="range-title" data-rec="U-R011">
+  <div class="container grid range__top">
+    <div class="range__brands">
+      <h2 id="range-title" data-reveal>Ford, Volkswagen, Audi, Mercedes — і ще 16 марок</h2>
+      <p class="range__num"><span class="anchor-num" data-reveal>20</span> <span class="anchor-cap">марок, на які підбираємо деталі</span></p>
+      <ul class="brand-index" aria-label="Основні марки">
+        {main.map((b) => <li><FutureLink note={soon} class="brand-index__item">{b}</FutureLink></li>)}
+      </ul>
+      <ul class="brand-more" aria-label="Інші марки">
+        {more.map((b) => <li><FutureLink note={soon} class="brand-more__item">{b}</FutureLink></li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container grid range__kinds">
+    <article class="kind kind--orig">
+      <h3><FutureLink note={soon} class="kind__title">Оригінальні запчастини</FutureLink></h3>
+      <p>Деталі з клеймом виробника автомобіля. Оригінал підбираємо під конкретне авто за вашим запитом: за VIN або даними машини.</p>
+    </article>
+    <article class="kind kind--lic">
+      <h3><FutureLink note={soon} class="kind__title">Ліцензійні запчастини</FutureLink></h3>
+      <p>Аналоги, виготовлені за ліцензією, часто тими ж постачальниками, що працюють на конвеєр. Як правило, при хорошій якості вони дешевші за оригінал.</p>
+      <p class="kind__update">Ціни на ліцензійні запчастини зі складу в Києві оновлено 30.10.2026.</p>
+    </article>
+  </div>
+
+  <div class="container grid range__more">
+    <div class="range__groups">
+      <h3>Групи запчастин</h3>
+      <ul class="group-index">
+        {groups.map((g) => <li><FutureLink note={soon} class="group-index__item">{g}</FutureLink></li>)}
+      </ul>
+    </div>
+    <dl class="range__facts">
+      <div><dt>Підвіска і рульове</dt><dd>LEMFORDER, TRW, SACHS, KYB, Moog</dd></div>
+      <div><dt>Мастила та автохімія</dt><dd>Castrol, Motul, Comma, Shell, Mobil</dd></div>
+      <div><dt>Типи авто</dt><dd>Запчастини для легкових і вантажних автомобілів</dd></div>
+    </dl>
+  </div>
+</section>

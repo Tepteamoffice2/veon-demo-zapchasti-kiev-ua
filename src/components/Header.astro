@@ -1,0 +1,67 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { nav, mainPhone, viber, telegram } from "../data/site";
+---
+<header id="top" class="site-header" data-rec="U-R002">
+  <div class="container site-header__inner">
+    <Logo class="site-header__logo" />
+    <nav class="site-nav" aria-label="Розділи головної">
+      <ul>
+        {nav.map((n) => <li><a href={`#${n.id}`}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="site-header__phone tnum" href={mainPhone.href}>{mainPhone.display}</a>
+      <a class="btn btn--primary btn--sm site-header__call" href={mainPhone.href}>
+        <Icon name="phone" size={18} /><span>Подзвонити</span>
+      </a>
+      <a class="icon-btn site-header__call-icon" href={mainPhone.href} aria-label={`Подзвонити ${mainPhone.display}`}>
+        <Icon name="phone" size={22} />
+      </a>
+      <a class="menu-fallback" href="#footer">Меню</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <Icon name="menu" size={22} class="menu-toggle__open" />
+        <Icon name="close" size={22} class="menu-toggle__close" />
+        <span class="menu-toggle__label">Меню</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav class="container mobile-menu__inner" aria-label="Меню">
+      <ul class="mobile-menu__list">
+        {nav.map((n) => <li><a href={`#${n.id}`}>{n.label}</a></li>)}
+      </ul>
+      <div class="mobile-menu__channels">
+        <a class="btn btn--primary btn--block" href={mainPhone.href}><Icon name="phone" /><span class="nowrap">Подзвонити {mainPhone.display}</span></a>
+        <div class="btn-pair">
+          <a class="btn btn--secondary" href={viber.href}><Icon name="viber" /><span>Viber</span></a>
+          <a class="btn btn--secondary" href={telegram.href}><Icon name="telegram" /><span>Telegram</span></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  if (btn && menu) {
+    const label = btn.querySelector(".menu-toggle__label");
+    const set = (open: boolean) => {
+      btn.setAttribute("aria-expanded", String(open));
+      if (label) label.textContent = open ? "Закрити" : "Меню";
+      menu.hidden = !open;
+      document.documentElement.classList.toggle("menu-open", open);
+      if (open) menu.querySelector<HTMLAnchorElement>("a")?.focus();
+    };
+    btn.addEventListener("click", () => set(btn.getAttribute("aria-expanded") !== "true"));
+    menu.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a")) set(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !menu.hidden) { set(false); btn.focus(); }
+    });
+    window.matchMedia("(min-width: 1200px)").addEventListener("change", (m) => { if (m.matches) set(false); });
+  }
+</script>
