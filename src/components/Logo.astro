@@ -2,8 +2,9 @@
 // Логотип клієнта (матеріал клієнта, logo350.png, фон прибрано, оптимізовано). Веде до початку головної.
 interface Props { href?: string; class?: string; eager?: boolean; }
 const { href = "#top", class: cls, eager = true } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 <a class:list={["logo", cls]} href={href} data-rec="P-R005">
-  <img src="/images/logo.png" width="350" height="68" alt="Zapchasti.kiev.ua — на початок сторінки"
+  <img src={`${base}images/logo.png`} width="350" height="68" alt="Zapchasti.kiev.ua — на початок сторінки"
     loading={eager ? "eager" : "lazy"} decoding="async" />
 </a>

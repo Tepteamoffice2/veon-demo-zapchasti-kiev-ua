@@ -9,7 +9,7 @@ import path from "node:path";
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const src = path.join(root, "src");
 const files = [];
-const walk = (d) => { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name); if (f.isDirectory()) walk(p); else files.push(p); } };
+const walk = (d) => { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name); if (f.isDirectory()) walk(p); else if (/.(astro|ts|tsx|js|mjs|css|md|json|svg|html)$/i.test(f.name)) files.push(p); } };
 walk(src);
 
 const errors = [];
